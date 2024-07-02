@@ -1,10 +1,15 @@
+mod store;
+
 mod systems {
-    mod actions;
+    mod game;
 }
 
 mod models {
-    mod moves;
-    mod position;
+    mod board;
+    mod game;
+    mod leader_board;
+    mod leader_board_players;
+    mod tile;
 }
 
 mod utils {
