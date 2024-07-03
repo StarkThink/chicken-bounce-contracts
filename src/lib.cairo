@@ -1,5 +1,11 @@
 mod store;
 
+mod utils {
+    mod maps;
+    mod random;
+    mod cell;
+}
+
 mod systems {
     mod game_system;
 }
@@ -10,14 +16,13 @@ mod models {
     mod leader_board;
     mod leader_board_players;
     mod tile;
+    mod events;
 }
-// #[cfg(test)]
-// mod tests {
-//     mod test_world;
-// }
 
-mod utils {
-    mod maps;
-    mod random;
-    mod cell;
+
+#[cfg(test)]
+mod tests {
+    mod create_game_test;
+    mod setup;
 }
+

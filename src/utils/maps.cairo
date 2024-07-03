@@ -307,3 +307,35 @@ fn get_random_map(world: IWorldDispatcher, round_number: u8) -> Array<Cell> {
     let grid = grids(round_number, random_index);
     grid
 }
+
+fn get_index_chicken_out(map: @Array<Cell>) -> u8 {
+    let mut index = 0_u8;
+    let chicken_out_index = loop {
+        if index.into() == map.len() {
+            break 0_u8;
+        }
+        let cell = *map.at(index.into());
+
+        if cell == Cell::ChickenOut {
+            break index;
+        }
+        index += 1;
+    };
+    chicken_out_index
+}
+
+fn get_index_chicken_in(map: @Array<Cell>) -> u8 {
+    let mut index = 0_u8;
+    let chicken_in_index = loop {
+        if index.into() == map.len() {
+            break 0_u8;
+        }
+        let cell = *map.at(index.into());
+
+        if cell == Cell::ChickenIn {
+            break index;
+        }
+        index += 1;
+    };
+    chicken_in_index
+}

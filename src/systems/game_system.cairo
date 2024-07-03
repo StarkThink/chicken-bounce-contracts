@@ -15,7 +15,7 @@ mod game_system {
     use chicken_bounce::models::leader_board::{LeaderBoard, LeaderBoardTrait};
     use chicken_bounce::models::leader_board_players::{LeaderBoardPlayers, LeaderBoardPlayersTrait};
     use chicken_bounce::utils::cell::Cell;
-    use chicken_bounce::utils::maps::get_random_map;
+    use chicken_bounce::utils::maps::{get_random_map, get_index_chicken_in, get_index_chicken_out};
     use chicken_bounce::models::events::{GameOver, GameWin, CreateGame};
     use chicken_bounce::models::tile::Tile;
     use chicken_bounce::store::{Store, StoreTrait};
@@ -23,7 +23,7 @@ mod game_system {
 
     #[abi(embed_v0)]
     impl GameImpl of IGameSystem<ContractState> {
-        fn create_game(world: IWorldDispatcher, player_name: felt252) -> u32 {
+        fn create_game(world: @IWorldDispatcher, player_name: felt252) -> u32 {
             let mut store = StoreTrait::new(world);
 
             let game_id = world.uuid() + 1;
@@ -33,7 +33,10 @@ mod game_system {
             // TODO: All the maps are 5x5 except in the last round. We have to change its sizes when the round is 7.
             self.store_map(game_id, ref store, @map, 5, 5);
 
-            let board = self.generate_board(game_id, 5, 5, 0, 0);
+            let chicken_in = get_index_chicken_in(@map);
+            let chicken_out = get_index_chicken_out(@map);
+
+            let board = self.generate_board(game_id, 5, 5, chicken_in, chicken_out);
 
             let mut leader_board = store.get_leader_board(1);
             if leader_board.len_players == 0 {
