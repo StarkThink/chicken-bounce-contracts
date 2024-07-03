@@ -1,4 +1,5 @@
-#[derive(Model, Copy, Drop, Serde)]
+#[derive(Copy, Drop, Serde)]
+#[dojo::model]
 struct LeaderBoardPlayers {
     #[key]
     id: u32,
