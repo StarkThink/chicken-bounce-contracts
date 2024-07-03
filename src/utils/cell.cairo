@@ -1,4 +1,4 @@
-#[derive(Clone, Copy, PartialEq, Drop, Display)]
+#[derive(Clone, Copy, PartialEq, Drop, Display, Serde)]
 enum Cell {
     StickE, // -> /
     StickW, // => \
