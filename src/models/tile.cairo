@@ -1,6 +1,6 @@
 use chicken_bounce::utils::cell::Cell;
 
-#[derive(Copy, Drop, Introspect)]
+#[derive(Copy, Drop, Serde)]
 #[dojo::model]
 struct Tile {
     #[key]
