@@ -26,3 +26,12 @@ struct GameOver {
     game_id: u32,
     player_address: ContractAddress
 }
+
+#[derive(Model, Copy, Drop, Serde)]
+#[dojo::event]
+struct GameEvent {
+    #[key]
+    id: u32,
+    score: u32,
+    round: u8
+}
