@@ -6,7 +6,7 @@ trait IGameSystem {
     fn create_game(ref world: IWorldDispatcher, player_name: felt252) -> u32;
     fn create_round(ref world: IWorldDispatcher, game_id: u32);
     fn play(ref world: IWorldDispatcher, game_id: u32, pos_x: u8, pos_y: u8);
-    fn end_game(game_id: u32);
+    fn end_game(ref world: IWorldDispatcher, game_id: u32);
 }
 
 #[dojo::contract]
@@ -95,7 +95,7 @@ mod game_system {
         }
 
         fn end_game(ref world: IWorldDispatcher, game_id: u32) {
-            self.end_game_proc(world, game_id);
+            self.end_game_process(world, game_id);
         }
 
         fn play(ref world: IWorldDispatcher, game_id: u32, pos_x: u8, pos_y: u8) {
