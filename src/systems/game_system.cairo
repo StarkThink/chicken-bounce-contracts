@@ -11,7 +11,6 @@ trait IGameSystem {
 
 #[dojo::contract]
 mod game_system {
-    use core::traits::Into;
     use super::IGameSystem;
     use chicken_bounce::models::game::{Game, GameTrait};
     use chicken_bounce::models::board::{Board, BoardTrait};
@@ -36,12 +35,12 @@ mod game_system {
             let owner = get_caller_address();
             let map = get_random_map(world, 1);
 
-            self.store_map(game_id, ref store, @map, 5, 5);
+            self.store_map(game_id, ref store, @map, 7, 7);
 
             let chicken_in = get_index_chicken_in(@map);
             let chicken_out = get_index_chicken_out(@map);
 
-            let board = self.generate_board(game_id, 5, 5, chicken_in, chicken_out);
+            let board = self.generate_board(game_id, 7, 7, chicken_in, chicken_out);
 
             let mut leader_board = store.get_leader_board(1);
             if leader_board.len_players == 0 {
@@ -67,8 +66,9 @@ mod game_system {
             let mut game = store.get_game(game_id);
 
             game.round += 1;
+            let map = get_random_map(world, game.round);
 
-            if game.round <= 7 {
+            if game.round <= 6 {
                 let gameEvent = GameEvent { id: game_id, score: game.score, round: game.round };
                 emit!(world, (gameEvent));
             } else {
@@ -78,19 +78,12 @@ mod game_system {
                 emit!(world, (GameOverEvent));
             }
 
-            let map = get_random_map(world, game.round);
-            let (rows, cols) = if game.round == 7 {
-                (6, 6)
-            } else {
-                (5, 5)
-            };
-
-            self.store_map(game_id, ref store, @map, rows, cols);
+            self.store_map(game_id, ref store, @map, 7, 7);
 
             let chicken_in = get_index_chicken_in(@map);
             let chicken_out = get_index_chicken_out(@map);
 
-            let board = self.generate_board(game_id, rows, cols, chicken_in, chicken_out);
+            let board = self.generate_board(game_id, 7, 7, chicken_in, chicken_out);
             store.set_board(board);
             store.set_game(game);
         }
