@@ -8,3 +8,17 @@ enum Cell {
     Border,
     Corner,
 }
+
+impl CellIntoFelt252 of Into<Cell, felt252> {
+    fn into(self: Cell) -> felt252 {
+        match self {
+            Cell::Empty => 'empty',
+            Cell::StickE => 'stickE',
+            Cell::StickW => 'stickW',
+            Cell::ChickenIn => 'player',
+            Cell::ChickenOut => 'target',
+            Cell::Border => 'blank',
+            Cell::Corner => 'corner',
+        }
+    }
+}

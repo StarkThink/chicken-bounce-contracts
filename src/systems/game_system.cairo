@@ -11,6 +11,7 @@ trait IGameSystem {
 
 #[dojo::contract]
 mod game_system {
+    use core::traits::Into;
     use super::IGameSystem;
     use chicken_bounce::models::game::{Game, GameTrait};
     use chicken_bounce::models::board::{Board, BoardTrait};
@@ -153,7 +154,7 @@ mod game_system {
                                 row_id: x_index.into(),
                                 col_id: y_index.into(),
                                 game_id: game_id,
-                                value: cell
+                                value: cell.into()
                             }
                         );
                     y_index += 1;
