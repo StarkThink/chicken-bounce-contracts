@@ -22,7 +22,8 @@ mod models {
 
 #[cfg(test)]
 mod tests {
-    mod create_game_test;
+    mod create_game;
     mod setup;
+    mod play;
 }
 

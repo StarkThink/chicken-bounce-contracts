@@ -339,3 +339,8 @@ fn get_index_chicken_in(map: @Array<Cell>) -> u8 {
     };
     chicken_in_index
 }
+
+fn get_chicken_out_at(len_cols: u8, row: u8, col: u8) -> u8 {
+    let index: u8 = ((row * len_cols) + col).into();
+    index
+}

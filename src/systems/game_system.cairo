@@ -3,10 +3,10 @@ use starknet::ContractAddress;
 
 #[dojo::interface]
 trait IGameSystem {
-    fn create_game(player_name: felt252) -> u32;
-    fn create_round(game_id: u32);
+    fn create_game(ref world: IWorldDispatcher, player_name: felt252) -> u32;
+    fn create_round(ref world: IWorldDispatcher, game_id: u32);
+    fn play(ref world: IWorldDispatcher, game_id: u32, pos_x: u8, pos_y: u8);
     fn end_game(game_id: u32);
-    fn play(pos_x: u8, pos_y: u8);
 }
 
 #[dojo::contract]
@@ -17,7 +17,9 @@ mod game_system {
     use chicken_bounce::models::leader_board::{LeaderBoard, LeaderBoardTrait};
     use chicken_bounce::models::leader_board_players::{LeaderBoardPlayers, LeaderBoardPlayersTrait};
     use chicken_bounce::utils::cell::Cell;
-    use chicken_bounce::utils::maps::{get_random_map, get_index_chicken_in, get_index_chicken_out};
+    use chicken_bounce::utils::maps::{
+        get_random_map, get_index_chicken_in, get_index_chicken_out, get_chicken_out_at
+    };
     use chicken_bounce::models::events::{GameEvent, GameOver, GameWin, CreateGame};
 
     use chicken_bounce::models::tile::Tile;
@@ -26,7 +28,7 @@ mod game_system {
 
     #[abi(embed_v0)]
     impl GameImpl of IGameSystem<ContractState> {
-        fn create_game(world: @IWorldDispatcher, player_name: felt252) -> u32 {
+        fn create_game(ref world: IWorldDispatcher, player_name: felt252) -> u32 {
             let mut store = StoreTrait::new(world);
 
             let game_id = world.uuid() + 1;
@@ -59,7 +61,7 @@ mod game_system {
             game_id
         }
 
-        fn create_round(world: @IWorldDispatcher, game_id: u32) {
+        fn create_round(ref world: IWorldDispatcher, game_id: u32) {
             let mut store: Store = StoreTrait::new(world);
             let mut game = store.get_game(game_id);
 
@@ -92,20 +94,22 @@ mod game_system {
             store.set_game(game);
         }
 
-        fn end_game(world: @IWorldDispatcher, game_id: u32) {
+        fn end_game(ref world: IWorldDispatcher, game_id: u32) {
             self.end_game_proc(world, game_id);
         }
-        
-        fn play(world: @IWorldDispatcher, pos_x: u8, pos_y: u8, game_id: u32) {
+
+        fn play(ref world: IWorldDispatcher, game_id: u32, pos_x: u8, pos_y: u8) {
             let mut store = StoreTrait::new(world);
 
-            let game = store.get_game(game_id);
-            let board = store.get_board(game_id);
+            let mut game = store.get_game(game_id);
+            let mut board = store.get_board(game_id);
 
             assert(game.state, 'Game is not active');
 
-            index = get_chicken_out_at()
-            if (pos_x * pos_y) == board.chicken_out_pos {
+            let index = get_chicken_out_at(board.len_cols, pos_x, pos_y);
+            println!("INDEX: {}", index);
+
+            if index == board.chicken_out_pos {
                 game.score += 10;
                 let GameWinEvent = GameWin {
                     game_id: game_id,
@@ -196,11 +200,6 @@ mod game_system {
 
             let GameOverEvent = GameOver { game_id: game_id, player_address: get_caller_address() };
             emit!(world, (GameOverEvent));
-        }
-
-        fn get_chicken_out_at(self: @ContractState, len_cols: u8, row: u8, col: u8) -> u8 {
-            let index: u32 = ((row * len_cols) + col).into();
-            index
         }
     }
 }
