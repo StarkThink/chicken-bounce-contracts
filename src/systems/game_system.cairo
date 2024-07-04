@@ -107,7 +107,6 @@ mod game_system {
             assert(game.state, 'Game is not active');
 
             let index = get_chicken_out_at(board.len_cols, pos_x, pos_y);
-            println!("INDEX: {}", index);
 
             if index == board.chicken_out_pos {
                 game.score += 10;
