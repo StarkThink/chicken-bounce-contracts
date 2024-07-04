@@ -23,6 +23,6 @@ sozo -P ${PROFILE} auth grant --world $WORLD_ADDRESS --wait writer \
   Board,$GAME_SYSTEM_ADDRESS\
   Tile,$GAME_SYSTEM_ADDRESS\
   LeaderBoard,$GAME_SYSTEM_ADDRESS\
-  LeaderBoardPlayer,$GAME_SYSTEM_ADDRESS\
+  LeaderBoardPlayers,$GAME_SYSTEM_ADDRESS\
 
 echo "Default authorizations have been successfully set."
