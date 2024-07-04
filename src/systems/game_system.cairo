@@ -4,8 +4,8 @@ use starknet::ContractAddress;
 #[dojo::interface]
 trait IGameSystem {
     fn create_game(player_name: felt252) -> u32;
+    fn create_round(game_id: u32);
 }
-
 
 #[dojo::contract]
 mod game_system {
@@ -16,7 +16,8 @@ mod game_system {
     use chicken_bounce::models::leader_board_players::{LeaderBoardPlayers, LeaderBoardPlayersTrait};
     use chicken_bounce::utils::cell::Cell;
     use chicken_bounce::utils::maps::{get_random_map, get_index_chicken_in, get_index_chicken_out};
-    use chicken_bounce::models::events::{GameOver, GameWin, CreateGame};
+    use chicken_bounce::models::events::{GameEvent, GameOver, GameWin, CreateGame};
+
     use chicken_bounce::models::tile::Tile;
     use chicken_bounce::store::{Store, StoreTrait};
     use starknet::{ContractAddress, get_caller_address, get_contract_address};
@@ -28,9 +29,8 @@ mod game_system {
 
             let game_id = world.uuid() + 1;
             let owner = get_caller_address();
-
             let map = get_random_map(world, 1);
-            // TODO: All the maps are 5x5 except in the last round. We have to change its sizes when the round is 7.
+            
             self.store_map(game_id, ref store, @map, 5, 5);
 
             let chicken_in = get_index_chicken_in(@map);
@@ -55,6 +55,35 @@ mod game_system {
             emit!(world, (CreateGameEvent));
 
             game_id
+        }
+
+        fn create_round(world: @IWorldDispatcher, game_id: u32) {
+            let mut store: Store = StoreTrait::new(world);
+            let mut game = store.get_game(game_id);
+
+            game.round += 1;
+            
+            if game.round <= 7 {
+                let gameEvent = GameEvent { id: game_id, score: game.score, round: game.round };
+                emit!(world, (gameEvent));
+            } else {
+                let GameOverEvent = GameOver {
+                    game_id: game_id, player_address: get_caller_address()
+                };
+                emit!(world, (GameOverEvent));
+            }
+
+            let map = get_random_map(world, game.round);
+            let (rows, cols) = if game.round == 7 { (6,6) } else { (5,5) };
+
+            self.store_map(game_id, ref store, @map, rows, cols);
+
+            let chicken_in = get_index_chicken_in(@map);
+            let chicken_out = get_index_chicken_out(@map);
+
+            let board = self.generate_board(game_id, rows, cols, chicken_in, chicken_out);
+            store.set_board(board);
+            store.set_game(game);
         }
     }
 
@@ -99,14 +128,14 @@ mod game_system {
         }
 
         fn generate_board(
-            self: @ContractState, game_id: u32, rows: u8, cols: u8, out_x_pos: u8, out_y_pos: u8,
+            self: @ContractState, game_id: u32, rows: u8, cols: u8, chicken_in_pos: u8, chicken_out_pos: u8,
         ) -> Board {
             Board {
                 game_id: game_id,
                 len_rows: rows,
                 len_cols: cols,
-                out_x_pos: out_x_pos,
-                out_y_pos: out_y_pos
+                chicken_in_pos: chicken_in_pos,
+                chicken_out_pos: chicken_out_pos
             }
         }
     }
