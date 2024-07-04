@@ -23,7 +23,7 @@ fn grids(round_number:u8, map_number: u8) -> Array<Cell> {
             Cell::Border, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Empty, Cell::StickW, Cell::Border,
             Cell::ChickenIn, Cell::Empty, Cell::StickE, Cell::Empty, Cell::Empty, Cell::StickE, Cell::Border,
             Cell::Border, Cell::StickW, Cell::Empty, Cell::StickE, Cell::Empty, Cell::Empty, Cell::Border,
-            Cell::Corner, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Corner
+            Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner
         ];
 
     let round1_map3 =
