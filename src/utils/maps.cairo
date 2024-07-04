@@ -203,101 +203,96 @@ fn grids(round_number:u8, map_number: u8) -> Array<Cell> {
             Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner
         ];
 
-    let round7_map1 =
-        array![
-            Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner,
-            Cell::Border, Cell::StickW, Cell::Empty, Cell::Empty, Cell::Empty, Cell::StickW, Cell::Empty, Cell::Border,
-            Cell::Border, Cell::Empty, Cell::StickW, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Border,
-            Cell::ChickenIn, Cell::Empty, Cell::Empty, Cell::StickW, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Border,
-            Cell::Border, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Empty, Cell::StickW, Cell::StickW, Cell::Border,
-            Cell::ChickenOut, Cell::Empty, Cell::Empty, Cell::StickE, Cell::StickW, Cell::Empty, Cell::Empty, Cell::Border,
-            Cell::Border, Cell::Empty, Cell::Empty, Cell::StickE, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Border,
-            Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner
-        ];
-
-    let round7_map2 =
-        array![
-            Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner,
-            Cell::Border, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Border, 
-            Cell::Border, Cell::Empty, Cell::StickE, Cell::Empty, Cell::StickE, Cell::Empty, Cell::Empty, Cell::Border, 
-            Cell::Border, Cell::Empty, Cell::Empty, Cell::Empty, Cell::StickE, Cell::Empty, Cell::Empty, Cell::ChickenOut,
-            Cell::Border, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Empty, Cell::StickW, Cell::Empty, Cell::Border,
-            Cell::Border, Cell::StickW, Cell::StickE, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Border,
-            Cell::ChickenIn, Cell::Empty, Cell::Empty, Cell::Empty, Cell::StickE, Cell::StickE, Cell::StickE, Cell::Border,
-            Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner,
-        ];
-
-    let round7_map3 =
-        array![
-            Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::ChickenOut, Cell::Corner,
-            Cell::ChickenIn, Cell::StickW, Cell::StickE, Cell::StickW, Cell::Empty, Cell::Empty, Cell::Border, 
-            Cell::Border, Cell::Empty, Cell::Empty, Cell::StickW, Cell::Empty, Cell::Empty, Cell::Border, 
-            Cell::Border, Cell::Empty, Cell::Empty, Cell::StickE, Cell::Empty, Cell::Empty, Cell::Border, 
-            Cell::Border, Cell::StickW, Cell::Empty, Cell::StickW, Cell::Empty, Cell::Empty, Cell::Border, 
-            Cell::Border, Cell::Empty, Cell::Empty, Cell::StickW, Cell::Empty, Cell::StickE, Cell::Border, 
-            Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner
-        ];
     
-    match round_number {
-        0 => array![Cell::Empty],
-        1 => {
-            match map_number {
-                0 => round1_map1,
-                1 => round1_map2,
-                2 => round1_map3,
-                _ => array![Cell::Empty]
+        if round_number == 1 {
+            if map_number == 1 {
+                round1_map1
             }
-        },
-        2 => {
-            match map_number {
-                0 => round2_map1,
-                1 => round2_map2,
-                2 => round2_map3,
-                _ => array![Cell::Empty]
+    
+            else if map_number == 2 {
+                round1_map2
             }
-        },
-        3 => {
-            match map_number {
-                0 => round3_map1,
-                1 => round3_map2,
-                2 => round3_map3,
-                _ => array![Cell::Empty]
+    
+            else {
+                round1_map3
             }
-        },
-        4 => {
-            match map_number {
-                0 => round4_map1,
-                1 => round4_map2,
-                2 => round4_map3,
-                _ => array![Cell::Empty]
+            
+        }
+    
+        else if round_number == 2 {
+            if map_number == 1 {
+                round2_map1
             }
-        },
-        5 => {
-            match map_number {
-                0 => round5_map1,
-                1 => round5_map2,
-                2 => round5_map3,
-                _ => array![Cell::Empty]
+    
+            else if map_number == 2 {
+                round2_map2
             }
-        },
-        6 => {
-            match map_number {
-                0 => round6_map1,
-                1 => round6_map2,
-                2 => round6_map3,
-                _ => array![Cell::Empty]
+    
+            else {
+                round2_map3
             }
-        },
-        7 => {
-            match map_number {
-                0 => round7_map1,
-                1 => round7_map2,
-                2 => round7_map3,
-                _ => array![Cell::Empty]
+            
+        }
+    
+        else if round_number == 3 {
+            if map_number == 1 {
+                round3_map1
             }
-        },
-        _ => array![Cell::Empty]
-    }
+    
+            else if map_number == 2 {
+                round3_map2
+            }
+    
+            else {
+                round3_map3
+            }
+            
+        }
+    
+        else if round_number == 4 {
+            if map_number == 1 {
+                round4_map1
+            }
+    
+            else if map_number == 2 {
+                round4_map2
+            }
+    
+            else {
+                round4_map3
+            }
+            
+        }
+    
+        else if round_number == 5 {
+            if map_number == 1 {
+                round5_map1
+            }
+    
+            else if map_number == 2 {
+                round5_map2
+            }
+    
+            else {
+                round5_map3
+            }
+            
+        }
+
+        else {
+            if map_number == 1 {
+                round6_map1
+            }
+    
+            else if map_number == 2 {
+                round6_map2
+            }
+    
+            else {
+                round6_map3
+            }
+            
+        }
 }
 
 fn get_random_map(world: IWorldDispatcher, round_number: u8) -> Array<Cell> {
