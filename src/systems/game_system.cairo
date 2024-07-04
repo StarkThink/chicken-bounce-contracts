@@ -5,6 +5,7 @@ use starknet::ContractAddress;
 trait IGameSystem {
     fn create_game(player_name: felt252) -> u32;
     fn create_round(game_id: u32);
+    fn end_game(game_id: u32);
 }
 
 #[dojo::contract]
@@ -85,6 +86,10 @@ mod game_system {
             store.set_board(board);
             store.set_game(game);
         }
+
+        fn end_game(world: @IWorldDispatcher, game_id: u32) {
+            self.end_game_proc(world, game_id);
+        }
     }
 
     #[generate_trait]
@@ -137,6 +142,24 @@ mod game_system {
                 chicken_in_pos: chicken_in_pos,
                 chicken_out_pos: chicken_out_pos
             }
+        }
+
+        fn end_game_proc(self: @ContractState, world: IWorldDispatcher, game_id: u32) {
+            let mut store: Store = StoreTrait::new(world);
+            let mut game: Game = store.get_game(game_id);
+            let mut leader_board: LeaderBoard = store.get_leader_board(1);
+
+            let new_player: LeaderBoardPlayers = LeaderBoardPlayersTrait::new(
+                leader_board.len_players, game.player_name, game.score
+            );
+            leader_board.len_players += 1;
+
+            store.set_leader_board_players(new_player);
+            store.set_leader_board(leader_board);
+            store.set_game(game);
+
+            let GameOverEvent = GameOver { game_id: game_id, player_address: get_caller_address() };
+            emit!(world, (GameOverEvent));
         }
     }
 }
