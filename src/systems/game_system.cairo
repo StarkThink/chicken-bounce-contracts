@@ -72,6 +72,7 @@ mod game_system {
                 let gameEvent = GameEvent { id: game_id, score: game.score, round: game.round };
                 emit!(world, (gameEvent));
             } else {
+                game.round = 1;
                 let GameOverEvent = GameOver {
                     game_id: game_id, player_address: get_caller_address()
                 };

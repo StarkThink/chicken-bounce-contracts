@@ -53,7 +53,7 @@ fn grids(round_number:u8, map_number: u8) -> Array<Cell> {
             Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner,
             Cell::ChickenIn, Cell::Empty, Cell::Empty, Cell::StickW, Cell::Empty, Cell::Empty, Cell::Border,
             Cell::Border, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Border,
-            Cell::Border, Cell::Empty, Cell::Empty, Cell::StickW, Cell::Empty, Cell::Empty, Cell::Border,
+            Cell::Border, Cell::Empty, Cell::Empty, Cell::StickW, Cell::Empty, Cell::Empty, Cell::ChickenOut,
             Cell::Border, Cell::StickE, Cell::Empty, Cell::StickW, Cell::Empty, Cell::StickW, Cell::Border,
             Cell::Border, Cell::StickE, Cell::Empty, Cell::Empty, Cell::StickE, Cell::StickE, Cell::Border,
             Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner
@@ -139,9 +139,9 @@ fn grids(round_number:u8, map_number: u8) -> Array<Cell> {
     let round5_map1 =
         array![
             Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner,
-            Cell::Border, Cell::Empty, Cell::StickE, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Border,
-            Cell::Border, Cell::StickW, Cell::StickW, Cell::Empty, Cell::Empty, Cell::Empty, Cell::ChickenIn,
             Cell::Border, Cell::Empty, Cell::StickE, Cell::Empty, Cell::Empty, Cell::Empty, Cell::ChickenOut,
+            Cell::Border, Cell::StickW, Cell::StickW, Cell::Empty, Cell::Empty, Cell::Empty, Cell::ChickenIn,
+            Cell::Border, Cell::Empty, Cell::StickE, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Border,
             Cell::Border, Cell::StickE, Cell::StickW, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Border,
             Cell::Border, Cell::StickE, Cell::Empty, Cell::Empty, Cell::Empty, Cell::StickW, Cell::Border,
             Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner
@@ -149,10 +149,10 @@ fn grids(round_number:u8, map_number: u8) -> Array<Cell> {
 
     let round5_map2 =
         array![
-            Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner,
+            Cell::Corner, Cell::ChickenOut, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner,
             Cell::Border, Cell::StickW, Cell::Empty, Cell::StickW, Cell::Empty, Cell::StickE,Cell::Border,
             Cell::ChickenIn, Cell::Empty, Cell::Empty, Cell::StickE, Cell::StickE, Cell::Empty, Cell::Border,
-            Cell::Border, Cell::StickE, Cell::Empty, Cell::StickE, Cell::Empty, Cell::Empty, Cell::ChickenOut,
+            Cell::Border, Cell::StickE, Cell::Empty, Cell::StickE, Cell::Empty, Cell::Empty, Cell::Border,
             Cell::Border, Cell::StickE, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Border,
             Cell::Border, Cell::Empty, Cell::Empty, Cell::Empty, Cell::StickE, Cell::Empty, Cell::Border,
             Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner
@@ -160,13 +160,13 @@ fn grids(round_number:u8, map_number: u8) -> Array<Cell> {
 
     let round5_map3 =
         array![
-            Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::ChickenOut, Cell::Corner,
+            Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner,
             Cell::Border, Cell::Empty, Cell::Empty, Cell::StickW, Cell::StickE, Cell::Empty, Cell::Border,
             Cell::Border, Cell::StickE, Cell::Empty, Cell::Empty, Cell::Empty,   Cell::Empty, Cell::Border,
             Cell::Border, Cell::StickW, Cell::StickW, Cell::StickE, Cell::Empty, Cell::StickW, Cell::Border,
             Cell::ChickenIn, Cell::Empty, Cell::Empty, Cell::Empty, Cell::StickW, Cell::StickE, Cell::Border,
             Cell::Border, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Border,
-            Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner
+            Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::ChickenOut, Cell::Border, Cell::Corner
         ];
 
     let round6_map1 = 
@@ -188,16 +188,16 @@ fn grids(round_number:u8, map_number: u8) -> Array<Cell> {
             Cell::Border, Cell::Empty, Cell::StickW, Cell::StickW, Cell::Empty, Cell::Empty, Cell::Border,
             Cell::Border, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Empty, Cell::StickW, Cell::Border,
             Cell::ChickenIn, Cell::StickW, Cell::Empty, Cell::StickW, Cell::Empty, Cell::Empty, Cell::Border,
-            Cell::Corner, Cell::Border, Cell::ChickenOut, Cell::Border, Cell::Border, Cell::Border, Cell::Corner
+            Cell::Corner, Cell::ChickenOut, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner
         ]
     );
 
     let round6_map3 =
         array![
-            Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner,
+            Cell::Corner, Cell::ChickenOut, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner,
             Cell::Border, Cell::StickW, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Empty, Cell::ChickenIn,
             Cell::Border, Cell::StickE, Cell::StickE, Cell::Empty, Cell::StickW, Cell::Empty, Cell::Border,
-            Cell::ChickenOut, Cell::Empty, Cell::StickW, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Border,
+            Cell::Border, Cell::Empty, Cell::StickW, Cell::Empty, Cell::Empty, Cell::Empty, Cell::Border,
             Cell::Border, Cell::Empty, Cell::Empty, Cell::StickE, Cell::StickW, Cell::Empty, Cell::Border,
             Cell::Border, Cell::Empty, Cell::Empty, Cell::Empty, Cell::StickE, Cell::StickW, Cell::Border,
             Cell::Corner, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Border, Cell::Corner
