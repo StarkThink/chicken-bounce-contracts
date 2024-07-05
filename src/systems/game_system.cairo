@@ -182,6 +182,8 @@ mod game_system {
             let mut game: Game = store.get_game(game_id);
             let mut leader_board: LeaderBoard = store.get_leader_board(1);
 
+            game.state = false;
+            
             let new_player: LeaderBoardPlayers = LeaderBoardPlayersTrait::new(
                 leader_board.len_players, game.player_name, game.score
             );
