@@ -10,9 +10,10 @@ sierra-replace-ids = true
 migrate = "sozo build && sozo migrate apply && ./scripts/default_auth.sh"
 spawn = "./scripts/spawn.sh"
 move = "./scripts/move.sh"
+deploy-sepolia = "rm -rf ./manifest/sepolia && sozo --profile sepolia clean && sozo --profile sepolia build && sozo --profile sepolia migrate plan --name chicken-bounce && sozo --profile sepolia migrate apply --fee-estimate-multiplier 10 --name chicken-bounce && ./scripts/default_auth.sh sepolia"
 
 [dependencies]
-dojo = { git = "https://github.com/dojoengine/dojo", tag = "v0.7.2" }
+dojo = { git = "https://github.com/dojoengine/dojo", tag = "v0.7.3" }
 
 [[target.dojo]]
 
@@ -25,6 +26,12 @@ rpc_url = "http://localhost:5050/"
 account_address = "0xb3ff441a68610b30fd5e2abbf3a1548eb6ba6f3559f2862bf2dc757e5828ca"
 private_key = "0x2bbf4f9fd0bbb2e60b0316c1fe0b76cf7a4d0198bd493ced9b8df2a3a24d68a"
 world_address = "0x6f86fd6ee34b5cfcedb3c9410e87fe1e2116f44d6889a659844b26fe065de29"  # Update this line with your world address
+
+[profile.sepolia.tool.dojo.env]
+rpc_url = "https://starknet-sepolia.public.blastapi.io/rpc/v0_7"
+world_address = "0x5d7f2e56ba22715f77787c3109e6af59ef45e253c701d2583b2bb913812dcf1" # This should be obtained after sozo migrate
+account_address = "0x04a1866b1CA0782CB11584E1D95f840220f2BE52242Ea80A0D28C503E02DA170" # This is a real sepolia account
+private_key = "0x03e031cc1be85d4313c30d04bc2b318a09b3bfb9cdcc6a047cbaa1c4d1e1c822"
 
 [tool.dojo.world]
 name = "Dojo starter"

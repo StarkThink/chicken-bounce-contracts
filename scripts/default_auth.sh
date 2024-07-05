@@ -10,7 +10,7 @@ fi
 
 export RPC_URL="http://localhost:5050"
 
-export WORLD_ADDRESS=$(cat ./manifests/dev/manifest.json | jq -r '.world.address')
+export WORLD_ADDRESS=$(cat ./manifests/$PROFILE/manifest.json | jq -r '.world.address')
 export GAME_SYSTEM_ADDRESS=$(cat ./manifests/$PROFILE/manifest.json | jq -r '.contracts[] | select(.name == "chicken_bounce::systems::game_system::game_system" ).address')
 
 echo "---------------------------------------------------------------------------"
